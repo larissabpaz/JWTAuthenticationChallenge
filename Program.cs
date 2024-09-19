@@ -52,11 +52,12 @@ builder.Services.AddSwaggerGen(options =>
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey,
+        Type = SecuritySchemeType.Http,
+        //Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Insira o token JWT desta forma: Bearer {seu token}"
+        Description = "Insira o token JWT desta forma: {seu token}"
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -70,6 +71,7 @@ builder.Services.AddSwaggerGen(options =>
                     Id = "Bearer"
                 }
             },
+            //new string[] { }
             Array.Empty<string>()
         }
     });
@@ -86,10 +88,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication(); // Middleware para autenticação
-app.UseAuthorization(); // Middleware para autorização
+app.UseAuthentication();
+app.UseAuthorization(); 
 
 app.MapControllers();
 
 app.Run();
-
