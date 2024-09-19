@@ -14,7 +14,7 @@ Este projeto é uma API simples construída com ASP.NET Core que implementa autent
 
 1. **Clonar o Repositório**
 
-   Clone este repositório para sua máquina local com o comando `git clone https://github.com/yourusername/your-repo-name.git`;
+   Clone este repositório para sua máquina local com o comando `git clone https://github.com/larissabpaz/WebApplicationJWTAuthentication.git`;
    Navegue até o diretório do projeto com `cd your-repo-name`. 	
    Execute `dotnet restore` para restaurar as dependências do projeto e, em seguida, inicie a aplicação com `dotnet run`.
    A API estará disponível em `https://localhost:7105`.
