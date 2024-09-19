@@ -1,33 +1,33 @@
-# API de Autenticação JWT
+# API de Autenticaï¿½ï¿½o JWT
 
-## Descrição
+## Descriï¿½ï¿½o
 
-Este projeto é uma API simples construída com ASP.NET Core que implementa autenticação usando JSON Web Tokens (JWT). A API permite registrar usuários, fazer login para obter um token JWT e acessar endpoints protegidos usando esse token.
+Este projeto ï¿½ uma API simples construï¿½da com ASP.NET Core que implementa autenticaï¿½ï¿½o usando JSON Web Tokens (JWT). A API permite registrar usuï¿½rios, fazer login para obter um token JWT e acessar endpoints protegidos usando esse token.
 
-## Pré-requisitos
+## Prï¿½-requisitos
 
 - [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
-- [Docker](https://www.docker.com/get-started) (opcional, para containerização)
+- [Docker](https://www.docker.com/get-started) (opcional, para containerizaï¿½ï¿½o)
 - [Visual Studio Code](https://code.visualstudio.com/) ou [Visual Studio](https://visualstudio.microsoft.com/) (para desenvolvimento)
 
-## Instalação e Execução
+## Instalaï¿½ï¿½o e Execuï¿½ï¿½o
 
-1. **Clonar o Repositório**
+1. **Clonar o Repositï¿½rio**
 
-   Clone este repositório para sua máquina local com o comando `git clone https://github.com/larissabpaz/WebApplicationJWTAuthentication.git`;
-   Navegue até o diretório do projeto com `cd your-repo-name`. 	
-   Execute `dotnet restore` para restaurar as dependências do projeto e, em seguida, inicie a aplicação com `dotnet run`.
-   A API estará disponível em `https://localhost:7105`.
+   Clone este repositï¿½rio para sua mï¿½quina local com o comando `git clone https://github.com/larissabpaz/JWTAuthenticationChallenge.git`;
+   Navegue atï¿½ o diretï¿½rio do projeto com `cd your-repo-name`. 	
+   Execute `dotnet restore` para restaurar as dependï¿½ncias do projeto e, em seguida, inicie a aplicaï¿½ï¿½o com `dotnet run`.
+   A API estarï¿½ disponï¿½vel em `https://localhost:7105`.
 
 
 ## Endpoints
 
-A API oferece três principais endpoints:
+A API oferece trï¿½s principais endpoints:
 
-1. **Registro de Usuário:** O endpoint para registrar um novo usuário está disponível no método `POST` na URL `/api/Auth/register`. 
+1. **Registro de Usuï¿½rio:** O endpoint para registrar um novo usuï¿½rio estï¿½ disponï¿½vel no mï¿½todo `POST` na URL `/api/Auth/register`. 
 
-2. **Login:** Para fazer login e obter um token JWT, use o método `POST` na URL `/api/Auth/login`. 
+2. **Login:** Para fazer login e obter um token JWT, use o mï¿½todo `POST` na URL `/api/Auth/login`. 
 
-3. **Endpoint Protegido:** O método `GET` na URL `/api/Auth/protected` permite acesso protegido que requer um token JWT válido. 
-   O token deve ser enviado no cabeçalho da requisição com o formato `Authorization: Bearer <your.jwt.token.here>`. 
+3. **Endpoint Protegido:** O mï¿½todo `GET` na URL `/api/Auth/protected` permite acesso protegido que requer um token JWT vï¿½lido. 
+   O token deve ser enviado no cabeï¿½alho da requisiï¿½ï¿½o com o formato `Authorization: Bearer <your.jwt.token.here>`. 
 

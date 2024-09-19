@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using WebApplicationJWTAuthentication.Models;
+using JWTAuthenticationChallenge.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

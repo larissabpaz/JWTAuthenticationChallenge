@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "WebApplicationJWTAuthentication": {
+    "JWTAuthenticationChallenge": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

@@ -1,4 +1,4 @@
-﻿namespace WebApplicationJWTAuthentication.Models
+﻿namespace JWTAuthenticationChallenge.Models
 {
     public class Login
     {

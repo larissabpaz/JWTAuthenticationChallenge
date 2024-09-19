@@ -10,16 +10,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["WebApplicationJWTAuthentication.csproj", "."]
-RUN dotnet restore "./WebApplicationJWTAuthentication.csproj"
+COPY ["JWTAuthenticationChallenge.csproj", "."]
+RUN dotnet restore "./JWTAuthenticationChallenge.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "WebApplicationJWTAuthentication.csproj" -c Release -o /app/build
+RUN dotnet build "JWTAuthenticationChallenge.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "WebApplicationJWTAuthentication.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "JWTAuthenticationChallenge.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "WebApplicationJWTAuthentication.dll"]
+ENTRYPOINT ["dotnet", "JWTAuthenticationChallenge.dll"]
