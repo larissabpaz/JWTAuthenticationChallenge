@@ -1,21 +1,26 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
+using WebApplicationJWTAuthentication.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add password hash service
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
+// Add services to the container.
 builder.Services.AddControllers();
 
 // Configure Authentication JWT
+var secretKey = "8NgvNBEalwf9Sn52YeVwPmFSKwaDTOIq";
 
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}
-)
+})
 .AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
@@ -24,16 +29,51 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = "https://authserver.com",
-        ValidAudience = "https://larissapazjwt.com",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("8NgvNBEalwf9Sn52YeVwPmFSKwaDTOIq"))
+        ValidIssuer = "https://localhost:7105",
+        ValidAudience = "https://localhost:7105",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
+        ClockSkew = TimeSpan.Zero
     };
-}
-);
+
+    if (builder.Environment.IsDevelopment())
+    {
+        options.TokenValidationParameters.ValidateLifetime = false;
+    }
+});
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "API JWT", Version = "v1" });
+
+    // Configurar o Swagger para usar JWT
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Insira o token JWT desta forma: Bearer {seu token}"
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
 
 var app = builder.Build();
 
@@ -46,10 +86,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
-
-app.UseAuthorization();
+app.UseAuthentication(); // Middleware para autenticação
+app.UseAuthorization(); // Middleware para autorização
 
 app.MapControllers();
 
 app.Run();
+
