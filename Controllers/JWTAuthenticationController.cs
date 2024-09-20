@@ -26,7 +26,7 @@ namespace JWTAuthenticationController.Controllers
         {
             user.Password = _passwordHasher.HashPassword(user, user.Password);
             users.Add(user);
-            return Ok(new { message = "Usu�rio registrado com sucesso" });
+            return Ok(new { message = "Usuário registrado com sucesso" });
         }
 
         [HttpPost("login")]
@@ -35,7 +35,7 @@ namespace JWTAuthenticationController.Controllers
             var user = users.FirstOrDefault(u => u.Username == loginUser.Username);
 
             if (user == null)
-                return Unauthorized(new { message = "Usu�rio n�o encontrado" });
+                return Unauthorized(new { message = "Usuário não encontrado" });
 
             var passwordVerification = _passwordHasher.VerifyHashedPassword(user, user.Password, loginUser.Password);
 
@@ -63,7 +63,7 @@ namespace JWTAuthenticationController.Controllers
         [HttpGet("protected")]
         public IActionResult Protected()
         {
-            return Ok(new { message = "Voc� acessou um endpoint protegido!" });
+            return Ok(new { message = "Você acessou um endpoint protegido!" });
         }
     }
 }
